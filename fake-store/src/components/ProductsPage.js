@@ -66,18 +66,18 @@ function ProductsPage() {
   const handleFilter = (filterOptions) => {
     let results = [...products];
     
-    // Filter by category
+    // filtro por categoria
     if (filterOptions.category !== 'all') {
       results = results.filter(product => product.category === filterOptions.category);
     }
     
-    // Filter by price range
+    // Filtro por rango de precio
     results = results.filter(product => 
       product.price >= filterOptions.price.min && 
       product.price <= filterOptions.price.max
     );
     
-    // Sort products
+    // orden de productos
     switch(filterOptions.sort) {
       case 'price-asc':
         results.sort((a, b) => a.price - b.price);
@@ -92,7 +92,7 @@ function ProductsPage() {
         results.sort((a, b) => b.title.localeCompare(a.title));
         break;
       default:
-        // Default sort by id
+        // orden predeterminado por id
         results.sort((a, b) => a.id - b.id);
     }
     

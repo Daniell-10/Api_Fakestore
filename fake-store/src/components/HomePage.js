@@ -15,13 +15,13 @@ function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetching featured products (limit to 4)
+        // Productos destacados
         const productResponse = await fetch('https://fakestoreapi.com/products?limit=4');
         if (!productResponse.ok) throw new Error('Error fetching products');
         const productData = await productResponse.json();
         setFeaturedProducts(productData);
         
-        // Fetching categories
+        // Categorias
         const categoryResponse = await fetch('https://fakestoreapi.com/products/categories');
         if (!categoryResponse.ok) throw new Error('Error fetching categories');
         const categoryData = await categoryResponse.json();
