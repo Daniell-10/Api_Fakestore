@@ -1,0 +1,13 @@
+{
+    "name": "Node.js & React",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+    "postCreateCommand": "npm install",
+    "forwardPorts": [3000],
+    "portsAttributes": {
+      "3000": {
+        "label": "React App",
+        "onAutoForward": "openBrowser"
+      }
+    }
+  }
+  
