@@ -7,8 +7,12 @@ import CategoriesPage from './components/CategoriesPage';
 import CartPage from './components/CartPage';
 import FavoritesPage from './components/FavoritesPage';
 import BottomNavigation from './components/BottomNavigation';
+import Header from './components/Header'; // 👈 Importa el Header
 import ThemeContext from './contexts/ThemeContext';
 import FavoritesContext from './contexts/FavoritesContext';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import { AuthProvider } from './contexts/AuthContext';
 import './App.css';
 
 function App() {
@@ -64,33 +68,38 @@ function App() {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, changeTheme }}>
-      <FavoritesContext.Provider value={{ 
-        favorites, 
-        addToFavorites, 
-        removeFromFavorites, 
-        updateFavorite, 
-        isFavorite 
-      }}>
-        <Router>
-          <div className="app-container" style={{ 
-            backgroundColor: theme.background, 
-            color: theme.text 
-          }}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/products" element={<ProductsPage />} />
-              <Route path="/products/:id" element={<ProductDetailPage />} />
-              <Route path="/categories" element={<CategoriesPage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/favorites" element={<FavoritesPage />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-            <BottomNavigation />
-          </div>
-        </Router>
-      </FavoritesContext.Provider>
-    </ThemeContext.Provider>
+    <AuthProvider>
+      <ThemeContext.Provider value={{ theme, changeTheme }}>
+        <FavoritesContext.Provider value={{ 
+          favorites, 
+          addToFavorites, 
+          removeFromFavorites, 
+          updateFavorite, 
+          isFavorite 
+        }}>
+          <Router>
+            <div className="app-container" style={{ 
+              backgroundColor: theme.background, 
+              color: theme.text 
+            }}>
+              <Header /> {/* 👈 Aquí agregamos el Header */}
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/products" element={<ProductsPage />} />
+                <Route path="/products/:id" element={<ProductDetailPage />} />
+                <Route path="/categories" element={<CategoriesPage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/favorites" element={<FavoritesPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+              <BottomNavigation />
+            </div>
+          </Router>
+        </FavoritesContext.Provider>
+      </ThemeContext.Provider>
+    </AuthProvider>
   );
 }
 
